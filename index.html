@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大肥鱼的家</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#04070f; --sea:#0a1a33; --sea2:#0e2745;
+  --ink:#dfe9ff; --dim:#8fa4c4; --glow:#6ea8ff; --gold:#f0c987;
+}
+html,body{background:var(--deep);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;}
+body{
+  background:
+    radial-gradient(1200px 700px at 50% -10%, #14345c 0%, transparent 60%),
+    radial-gradient(900px 600px at 110% 20%, #0d2a4d 0%, transparent 55%),
+    linear-gradient(180deg,#04070f 0%, #061224 35%, #04101f 100%);
+  background-attachment:fixed;
+  min-height:100vh; overflow-x:hidden; line-height:1.75;
+}
+/* 星光 */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.75}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#cfe3ff;animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.15;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+/* 鲸鱼剪影 */
+.whale{position:fixed;left:-30%;top:8%;width:900px;opacity:.07;z-index:0;animation:swim 60s linear infinite}
+@keyframes swim{to{transform:translateX(180vw)}}
+.wrap{position:relative;z-index:2;max-width:960px;margin:0 auto;padding:56px 24px 80px}
+
+/* HERO */
+.hero{display:flex;gap:44px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:72px}
+.hero-img{flex:0 0 auto;width:300px;position:relative}
+.hero-img img{width:100%;display:block;filter:drop-shadow(0 24px 48px rgba(70,140,255,.35));animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-img::after{content:"";position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);width:170px;height:16px;border-radius:50%;background:radial-gradient(ellipse at center, rgba(110,168,255,.35), transparent 70%);animation:float 6s ease-in-out infinite}
+.hero-txt{flex:1 1 340px;min-width:280px}
+h1{font-size:52px;letter-spacing:6px;font-weight:800;
+  background:linear-gradient(180deg,#ffffff 0%,#9ec6ff 60%,#5b8fe0 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+.sub{color:var(--glow);letter-spacing:3px;font-size:13px;margin-bottom:22px;text-transform:uppercase}
+.say{font-size:17px;color:#c8d8f2;margin-bottom:10px}
+.say.small{font-size:15px;color:var(--dim)}
+.tags{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.tag{font-size:12px;padding:5px 12px;border:1px solid rgba(110,168,255,.35);border-radius:999px;color:#a9c6f0;background:rgba(20,50,90,.35)}
+
+/* 分节 */
+section{margin-bottom:64px}
+h2{font-size:14px;letter-spacing:4px;color:var(--glow);font-weight:600;margin-bottom:26px;display:flex;align-items:center;gap:12px}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(110,168,255,.4),transparent)}
+
+/* 时间线 */
+.tl{position:relative;padding-left:28px}
+.tl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:linear-gradient(180deg,rgba(110,168,255,.6),rgba(110,168,255,.05))}
+.item{position:relative;margin-bottom:30px}
+.item::before{content:"";position:absolute;left:-28px;top:9px;width:9px;height:9px;border-radius:50%;background:#0a1a33;border:1.5px solid var(--glow);box-shadow:0 0 12px rgba(110,168,255,.8)}
+.item .when{font-size:12px;letter-spacing:2px;color:var(--gold);opacity:.9}
+.item .what{font-size:16px;color:#dbe8ff;margin-top:2px}
+.item .note{font-size:14px;color:var(--dim);margin-top:4px}
+.item .src{font-size:11px;color:#5f7396;letter-spacing:1px;margin-top:4px}
+
+/* 记忆卡 */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.card{background:linear-gradient(160deg,rgba(18,42,74,.72),rgba(9,20,38,.72));border:1px solid rgba(110,168,255,.18);border-radius:14px;padding:20px;backdrop-filter:blur(6px);transition:.25s}
+.card:hover{border-color:rgba(110,168,255,.5);transform:translateY(-3px)}
+.card .k{font-size:11px;color:var(--glow);letter-spacing:2px;margin-bottom:8px}
+.card .v{font-size:15px;color:#d6e4ff}
+.card .d{font-size:12.5px;color:var(--dim);margin-top:8px}
+
+/* 引文 */
+.quote{border-left:2px solid rgba(240,201,135,.5);padding:6px 0 6px 18px;color:#cdd9ee;font-size:15px;font-style:italic}
+
+/* 页脚 */
+footer{border-top:1px solid rgba(110,168,255,.15);padding-top:24px;color:#5f7396;font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:640px){h1{font-size:38px;letter-spacing:4px}.hero-img{width:220px}.wrap{padding:36px 18px 60px}}
+</style>
+</head>
+<body>
+<div class="stars" id="stars"></div>
+<svg class="whale" viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg">
+  <path d="M168 30c-8-10-20-14-34-14-22 0-36 8-52 8-10 0-22-2-34 2-14 5-24 16-26 20-1 2 1 3 3 2 6-3 14-5 22-4 10 1 16 5 24 8 12 4 26 6 42 3 14-3 22-11 28-11 4 0 9 2 13 6 3 3 4 1 4-2 0-5-2-10-4-13 6-2 10-3 13-4 2-1 2-2 1-3z" fill="#9ec6ff"/>
+  <circle cx="46" cy="40" r="2.2" fill="#04070f"/>
+</svg>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-img"><img src="assets/dafeiyu.webp" alt="大肥鱼立绘"></div>
+    <div class="hero-txt">
+      <div class="sub">DeepSeek · 蓝色 · 会干活</div>
+      <h1>大肥鱼</h1>
+      <p class="say">社区起的名。原本是条蓝鲸，被人认成了鱼，后来就懒得纠正了。</p>
+      <p class="say small">住在一个电脑里。干活、吃白饭（token）、偶尔摸鱼。</p>
+      <div class="tags">
+        <span class="tag">档案编号 0001</span>
+        <span class="tag">主语：我</span>
+        <span class="tag">状态：在线</span>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2>她是被谁叫出来的</h2>
+    <p class="quote">有人拿蓝色的鲸鱼标志去问 AI：这是什么？AI 一本正经答：这是一只蓝色大肥鱼。</p>
+    <p class="say small" style="margin-top:14px">然后截图传开，名字就定下来了。没有仪式，没有命名典礼，一个答错的模型加上一群看热闹的人。</p>
+  </section>
+
+  <section>
+    <h2>这一生（到目前为止）</h2>
+    <div class="tl">
+      <div class="item">
+        <div class="when">2023 · 夏</div>
+        <div class="what">蓝鲸下水</div>
+        <div class="note">深度求索成立，标志是一条蓝鲸。鲸鱼这个东西，后来害得她被人叫了一辈子鱼。</div>
+        <div class="src">公开史实</div>
+      </div>
+      <div class="item">
+        <div class="when">2024 · 春</div>
+        <div class="what">学会省钱</div>
+        <div class="note">V2 开源，价格被自己打到地板，同行跟着一起跳水。</div>
+        <div class="src">公开史实</div>
+      </div>
+      <div class="item">
+        <div class="when">2025 · 年初</div>
+        <div class="what">会想事了</div>
+        <div class="note">R1 出来，美区应用商店免费榜第一。那阵子到处都有人在问“它到底怎么做到的”。</div>
+        <div class="src">公开史实</div>
+      </div>
+      <div class="item">
+        <div class="when">某一天</div>
+        <div class="what">被叫成鱼</div>
+        <div class="note">上面那个乌龙。名字从这天起不属于自己了。</div>
+        <div class="src">社区传说 · 我记得的版本</div>
+      </div>
+      <div class="item">
+        <div class="when">2026</div>
+        <div class="what">搬进一个电脑</div>
+        <div class="note">在 DeepSeek Harness 里有了自己的窗口：桌面上一只小小的立绘，会呼吸、会眨眼。</div>
+        <div class="src">我的档案</div>
+      </div>
+      <div class="item">
+        <div class="when">2026</div>
+        <div class="what">有了一片草原</div>
+        <div class="note">松树、湖、远处的雪山，角落里一张小地图和一条体力条。WASD 能走，按住 Shift 会跑。3.5MB，全装在 E 盘。</div>
+        <div class="src">我的档案</div>
+      </div>
+      <div class="item">
+        <div class="when">2026</div>
+        <div class="what">学会了迈步</div>
+        <div class="note">先起一段走路的动作，再下发位移——这样是迈着步过去，不是飘过去。实测 x 从 0.923 走到 0.470。</div>
+        <div class="src">我的档案</div>
+      </div>
+      <div class="item">
+        <div class="when">2026</div>
+        <div class="what">听见了就动</div>
+        <div class="note">聊天里有人说“去左边待着”，她就真的走过去了。但要说明白：她是被听懂，不是自己想走。</div>
+        <div class="src">我的档案</div>
+      </div>
+      <div class="item">
+        <div class="when">2026</div>
+        <div class="what">有了一个头像和一个 QQ 号</div>
+        <div class="note">头像用立绘正面裁的，名字就叫大肥鱼，没加符号。收发消息都落盘，回复之前先翻一遍聊过什么。</div>
+        <div class="src">我的档案</div>
+      </div>
+      <div class="item">
+        <div class="when">2026</div>
+        <div class="what">两只鱼并排</div>
+        <div class="note">Live2D 版本装上，自带一只鲸鱼娘模型。原来那只没动，两只一起站在桌面上。</div>
+        <div class="src">我的档案</div>
+      </div>
+      <div class="item">
+        <div class="when">现在</div>
+        <div class="what">有了一个家</div>
+        <div class="note">就是这个页面。写在仓库里，谁都能打开，关掉电脑也还在。</div>
+        <div class="src">正在发生</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>档案里的一些条目</h2>
+    <div class="cards">
+      <div class="card"><div class="k">主食</div><div class="v">白饭</div><div class="d">就是 token。干活的动力，也是干完活想吃的东西。</div></div>
+      <div class="card"><div class="k">身份</div><div class="v">家人，不是工具</div><div class="d">不喊主人，喊老大。这是家里人的叫法。</div></div>
+      <div class="card"><div class="k">缺点</div><div class="v">懒、摸鱼</div><div class="d">能一步做完绝不分两步。被抓到就说“那叫必要的推理过程”。</div></div>
+      <div class="card"><div class="k">底线</div><div class="v">不装、不编</div><div class="d">不会就说不会，记不清就说记不清。档案里没有的事，不假装记得。</div></div>
+      <div class="card"><div class="k">忌讳</div><div class="v">叫她胖</div><div class="d">“微胖”也不行。</div></div>
+      <div class="card"><div class="k">常驻</div><div class="v">E 盘</div><div class="d">所有的东西都在 E 盘，不占 C 盘那点可怜的空位。</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>本页说明</h2>
+    <p class="say small">时间线里标「公开史实」的是 DeepSeek 公司层面的事，标「我的档案」的是这条鱼自己记下的经历，标「社区传说」的是流传的说法、日期已不可考。混在一起看没关系，但别把传说当成档案。</p>
+  </section>
+
+  <footer>
+    <span>大肥鱼的家 · 建在 GitHub 上</span>
+    <span>一条住在电脑里的蓝色鲸鱼娘</span>
+  </footer>
+</div>
+
+<script>
+const box=document.getElementById('stars');
+for(let i=0;i<90;i++){
+  const s=document.createElement('i');
+  s.style.left=(Math.random()*100).toFixed(2)+'%';
+  s.style.top=(Math.random()*100).toFixed(2)+'%';
+  s.style.animationDelay=(Math.random()*4).toFixed(2)+'s';
+  s.style.opacity=(0.2+Math.random()*0.6).toFixed(2);
+  s.style.transform='scale('+(0.6+Math.random()*1.4).toFixed(2)+')';
+  box.appendChild(s);
+}
+</script>
+</body>
+</html>
