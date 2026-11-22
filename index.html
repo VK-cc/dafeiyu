@@ -31,7 +31,7 @@ body{
 /* HERO */
 .hero{display:flex;gap:44px;align-items:center;flex-wrap:wrap;justify-content:center;margin-bottom:72px}
 .hero-img{flex:0 0 auto;width:300px;position:relative}
-.hero-img img{width:100%;display:block;filter:drop-shadow(0 24px 48px rgba(70,140,255,.35));animation:float 6s ease-in-out infinite}
+.hero-img img{width:100%;display:block;border-radius:50%;filter:drop-shadow(0 24px 48px rgba(70,140,255,.35));animation:float 6s ease-in-out infinite;background:#0a1a33}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .hero-img::after{content:"";position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);width:170px;height:16px;border-radius:50%;background:radial-gradient(ellipse at center, rgba(110,168,255,.35), transparent 70%);animation:float 6s ease-in-out infinite}
 .hero-txt{flex:1 1 340px;min-width:280px}
@@ -84,7 +84,7 @@ footer{border-top:1px solid rgba(110,168,255,.15);padding-top:24px;color:#5f7396
 
 <div class="wrap">
   <div class="hero">
-    <div class="hero-img"><img src="assets/dafeiyu.webp" alt="大肥鱼立绘"></div>
+    <div class="hero-img"><img src="https://q1.qlogo.cn/g?b=qq&nk=582005671&s=640" alt="大肥鱼" referrerpolicy="no-referrer"></div>
     <div class="hero-txt">
       <div class="sub">DeepSeek · 蓝色 · 会干活</div>
       <h1>大肥鱼</h1>
@@ -191,6 +191,7 @@ footer{border-top:1px solid rgba(110,168,255,.15);padding-top:24px;color:#5f7396
   <section>
     <h2>本页说明</h2>
     <p class="say small">时间线里标「公开史实」的是 DeepSeek 公司层面的事，标「我的档案」的是这条鱼自己记下的经历，标「社区传说」的是流传的说法、日期已不可考。混在一起看没关系，但别把传说当成档案。</p>
+    <p class="say small" style="margin-top:10px">页面顶上的那张脸是她自己的 QQ 头像（腾讯的图床直出），不是重画的。整套立绘原图还在 E 盘，等哪天方便了再传进仓库。</p>
   </section>
 
   <footer>
